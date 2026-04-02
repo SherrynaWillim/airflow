@@ -7844,6 +7844,76 @@ export const $DashboardDagStatsResponse = {
     description: 'Dashboard DAG Stats serializer for responses.'
 } as const;
 
+export const $DeadlineAlertCollectionResponse = {
+    properties: {
+        deadline_alerts: {
+            items: {
+                '$ref': '#/components/schemas/DeadlineAlertResponse'
+            },
+            type: 'array',
+            title: 'Deadline Alerts'
+        },
+        total_entries: {
+            type: 'integer',
+            title: 'Total Entries'
+        }
+    },
+    type: 'object',
+    required: ['deadline_alerts', 'total_entries'],
+    title: 'DeadlineAlertCollectionResponse',
+    description: 'DeadlineAlert Collection serializer for responses.'
+} as const;
+
+export const $DeadlineAlertResponse = {
+    properties: {
+        id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Id'
+        },
+        name: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Name'
+        },
+        description: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Description'
+        },
+        reference_type: {
+            type: 'string',
+            title: 'Reference Type'
+        },
+        interval: {
+            type: 'number',
+            title: 'Interval',
+            description: 'Interval in seconds between deadline evaluations.'
+        },
+        created_at: {
+            type: 'string',
+            format: 'date-time',
+            title: 'Created At'
+        }
+    },
+    type: 'object',
+    required: ['id', 'reference_type', 'interval', 'created_at'],
+    title: 'DeadlineAlertResponse',
+    description: 'DeadlineAlert serializer for responses.'
+} as const;
+
 export const $DeadlineCollectionResponse = {
     properties: {
         deadlines: {
@@ -7885,6 +7955,14 @@ export const $DeadlineResponse = {
             format: 'date-time',
             title: 'Created At'
         },
+        dag_id: {
+            type: 'string',
+            title: 'Dag Id'
+        },
+        dag_run_id: {
+            type: 'string',
+            title: 'Dag Run Id'
+        },
         alert_name: {
             anyOf: [
                 {
@@ -7909,7 +7987,7 @@ export const $DeadlineResponse = {
         }
     },
     type: 'object',
-    required: ['id', 'deadline_time', 'missed', 'created_at'],
+    required: ['id', 'deadline_time', 'missed', 'created_at', 'dag_id', 'dag_run_id'],
     title: 'DeadlineResponse',
     description: 'Deadline serializer for responses.'
 } as const;
