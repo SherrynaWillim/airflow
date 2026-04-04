@@ -1,6 +1,6 @@
 
 #
-# This constraints file was automatically generated on 2026-04-03T21:51:55.356860
+# This constraints file was automatically generated on 2026-04-04T09:51:01.287222
 # via `uv pip install --resolution highest` for the "main" branch of Airflow.
 # This variant of constraints install uses the HEAD of the branch version for 'apache-airflow' but installs
 # the providers from PIP-released packages at the moment of the constraint generation.
@@ -263,7 +263,7 @@ darabonba-core==1.0.5
 databricks-sql-connector==4.2.5
 dataclasses-json==0.6.7
 datadog==0.52.1
-db-dtypes==1.5.0
+db-dtypes==1.5.1
 debugpy==1.8.20
 decorator==5.2.1
 defusedxml==0.7.1
@@ -304,33 +304,33 @@ genai-prices==0.0.56
 gevent==25.9.1
 gitdb==4.0.12
 google-ads==30.0.0
-google-analytics-admin==0.27.0
-google-api-core==2.30.0
+google-analytics-admin==0.28.0
+google-api-core==2.30.1
 google-api-python-client==2.193.0
-google-auth-httplib2==0.3.0
+google-auth-httplib2==0.3.1
 google-auth-oauthlib==1.3.1
 google-auth==2.49.1
 google-cloud-aiplatform==1.143.0
-google-cloud-alloydb==0.8.0
-google-cloud-appengine-logging==1.8.0
-google-cloud-audit-log==0.4.0
-google-cloud-automl==2.18.1
-google-cloud-batch==0.20.0
-google-cloud-bigquery-datatransfer==3.21.0
-google-cloud-bigquery-storage==2.36.2
-google-cloud-bigquery==3.40.1
+google-cloud-alloydb==0.9.0
+google-cloud-appengine-logging==1.9.0
+google-cloud-audit-log==0.5.0
+google-cloud-automl==2.19.0
+google-cloud-batch==0.21.0
+google-cloud-bigquery-datatransfer==3.22.0
+google-cloud-bigquery-storage==2.37.0
+google-cloud-bigquery==3.41.0
 google-cloud-bigtable==2.35.0
-google-cloud-build==3.35.0
-google-cloud-compute==1.46.0
-google-cloud-container==2.63.0
-google-cloud-core==2.5.0
+google-cloud-build==3.36.0
+google-cloud-compute==1.47.0
+google-cloud-container==2.64.0
+google-cloud-core==2.5.1
 google-cloud-datacatalog==3.30.0
 google-cloud-dataflow-client==0.12.0
-google-cloud-dataform==0.9.0
+google-cloud-dataform==0.10.0
 google-cloud-dataplex==2.18.0
 google-cloud-dataproc-metastore==1.22.0
 google-cloud-dataproc==5.26.0
-google-cloud-dlp==3.34.0
+google-cloud-dlp==3.35.0
 google-cloud-kms==3.12.0
 google-cloud-language==2.20.0
 google-cloud-logging==3.15.0
@@ -357,7 +357,7 @@ google-cloud-vision==3.13.0
 google-cloud-workflows==1.21.0
 google-crc32c==1.8.0
 google-genai==1.69.0
-google-resumable-media==2.8.0
+google-resumable-media==2.8.2
 googleapis-common-protos==1.73.1
 graphviz==0.21
 greenback==1.3.0
@@ -539,9 +539,9 @@ pybreaker==1.4.1
 pycountry==26.2.16
 pycparser==3.0
 pycryptodome==3.23.0
-pydantic-ai-slim==1.73.0
+pydantic-ai-slim==1.74.0
 pydantic-extra-types==2.11.1
-pydantic-graph==1.73.0
+pydantic-graph==1.74.0
 pydantic-settings==2.13.1
 pydantic==2.12.5
 pydantic_core==2.41.5
@@ -578,7 +578,7 @@ pyzmq==27.1.0
 qdrant-client==1.17.1
 reactivex==4.1.0
 redis==6.4.0
-redshift-connector==2.1.7
+redshift_connector==2.1.13
 referencing==0.37.0
 regex==2026.3.32
 requests-file==3.0.1
@@ -603,7 +603,7 @@ scramp==1.4.8
 scrapbook==0.5.0
 segment-analytics-python==2.3.3
 sendgrid==6.12.2
-sentry-sdk==2.56.0
+sentry-sdk==2.57.0
 setproctitle==1.3.7
 setuptools==82.0.1
 shellingham==1.5.4
