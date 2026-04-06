@@ -1,6 +1,6 @@
 
 #
-# This constraints file was automatically generated on 2026-04-06T12:11:57.015150
+# This constraints file was automatically generated on 2026-04-06T15:49:42.298030
 # via `uv pip install --resolution highest` for the "main" branch of Airflow.
 # This variant of constraints install uses the HEAD of the branch version for 'apache-airflow' but installs
 # the providers from PIP-released packages at the moment of the constraint generation.
@@ -317,7 +317,7 @@ google-api-python-client==2.193.0
 google-auth-httplib2==0.3.1
 google-auth-oauthlib==1.3.1
 google-auth==2.49.1
-google-cloud-aiplatform==1.144.0
+google-cloud-aiplatform==1.145.0
 google-cloud-alloydb==0.9.0
 google-cloud-appengine-logging==1.9.0
 google-cloud-audit-log==0.5.0
@@ -457,7 +457,7 @@ microsoft-kiota-serialization-json==1.9.10
 microsoft-kiota-serialization-text==1.9.10
 mistune==3.2.0
 mmh3==5.2.1
-more-itertools==10.8.0
+more-itertools==11.0.0
 msal-extensions==1.3.1
 msal==1.35.1
 msgpack==1.1.2
@@ -521,7 +521,7 @@ pexpect==4.9.0
 pgvector==0.4.2
 pinecone-plugin-assistant==3.0.3
 pinecone-plugin-interface==0.0.7
-pinecone==8.1.0
+pinecone==8.1.1
 pinotdb==9.1.1
 platformdirs==4.9.4
 pluggy==1.6.0
