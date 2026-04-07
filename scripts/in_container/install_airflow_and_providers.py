@@ -1130,9 +1130,10 @@ def _install_airflow_and_optionally_providers_together(
     if installation_spec.pre_release or (
         installation_spec.airflow_distribution and "==" in installation_spec.airflow_distribution
     ):
-        console.print("[bright_blue]Allowing pre-release versions of airflow and providers")
+        console.print("[bright_blue]Allowing install w/ cooldown as specific distribution requested.")
         base_install_cmd.extend(["--exclude-newer", datetime.now().isoformat()])
     if installation_spec.pre_release:
+        console.print("[bright_blue]Allowing pre-release versions of airflow and providers")
         base_install_cmd.append("--pre")
     if installation_spec.airflow_distribution:
         console.print(
