@@ -30,7 +30,6 @@ from airflow.providers.openlineage.sqlparser import SQLParser
 from airflow.providers.openlineage.utils.sql_hook_lineage import (
     _create_ol_event_pair,
     _get_hook_conn_id,
-    _resolve_namespace,
     emit_lineage_from_sql_extras,
 )
 from airflow.providers.openlineage.utils.utils import _get_parent_run_facet
@@ -72,45 +71,6 @@ class TestGetHookConnId:
     def test_returns_none_when_nothing_available(self):
         hook = mock.MagicMock(spec=[])
         assert _get_hook_conn_id(hook) is None
-
-
-class TestResolveNamespace:
-    def test_from_ol_database_info(self):
-        hook = mock.MagicMock()
-        connection = mock.MagicMock()
-        hook.get_connection.return_value = connection
-        database_info = mock.MagicMock()
-        hook.get_openlineage_database_info.return_value = database_info
-
-        with mock.patch(
-            "airflow.providers.openlineage.utils.sql_hook_lineage.SQLParser.create_namespace",
-            return_value="postgres://host:5432/mydb",
-        ) as mock_create_ns:
-            result = _resolve_namespace(hook, "my_conn")
-
-        hook.get_connection.assert_called_once_with("my_conn")
-        hook.get_openlineage_database_info.assert_called_once_with(connection)
-        mock_create_ns.assert_called_once_with(database_info)
-        assert result == "postgres://host:5432/mydb"
-
-    def test_returns_none_when_no_namespace_available(self):
-        hook = mock.MagicMock()
-        hook.__class__.__name__ = "SomeUnknownHook"
-        hook.get_connection.side_effect = Exception("no method")
-
-        with mock.patch.dict("sys.modules"):
-            result = _resolve_namespace(hook, "my_conn")
-
-        assert result is None
-
-    def test_returns_none_when_no_conn_id(self):
-        hook = mock.MagicMock()
-        hook.__class__.__name__ = "SomeUnknownHook"
-
-        with mock.patch.dict("sys.modules"):
-            result = _resolve_namespace(hook, None)
-
-        assert result is None
 
 
 class TestCreateOlEventPair:
@@ -288,7 +248,7 @@ class TestEmitLineageFromSqlExtras:
         with (
             mock.patch(f"{_MODULE}.generate_new_uuid", return_value=_VALID_UUID) as mock_uuid,
             mock.patch(f"{_MODULE}._get_hook_conn_id", return_value="my_conn") as mock_conn_id,
-            mock.patch(f"{_MODULE}._resolve_namespace") as mock_ns,
+            mock.patch(f"{_MODULE}.SQLParser.create_namespace") as mock_ns,
             mock.patch(f"{_MODULE}.get_openlineage_facets_with_sql") as mock_facets_fn,
             mock.patch(f"{_MODULE}.get_openlineage_listener") as mock_listener,
             mock.patch(f"{_MODULE}._create_ol_event_pair") as mock_event_pair,
@@ -319,8 +279,6 @@ class TestEmitLineageFromSqlExtras:
             sql_extras=sql_extras,
         )
         assert result is None
-        self.mock_conn_id.assert_not_called()
-        self.mock_ns.assert_not_called()
         self.mock_facets_fn.assert_not_called()
         self.mock_event_pair.assert_not_called()
         self.mock_listener.assert_not_called()
@@ -513,7 +471,6 @@ class TestEmitLineageFromSqlExtras:
     def test_job_id_only_extra_emits_events(self):
         """An extra with only job_id (no SQL text) should still produce events."""
         self.mock_conn_id.return_value = None
-        self.mock_ns.return_value = "ns"
         self.mock_facets_fn.return_value = None
         mock_ti = mock.MagicMock(dag_id="dag_id", task_id="task_id")
 
@@ -525,16 +482,14 @@ class TestEmitLineageFromSqlExtras:
 
         assert result is None
 
-        expected_ext_query = external_query_run.ExternalQueryRunFacet(
-            externalQueryId="external-123", source="ns"
-        )
+        # conn_id is None → namespace cannot be resolved → no externalQuery facet
         self.mock_event_pair.assert_called_once_with(
             task_instance=mock_ti,
             job_name="dag_id.task_id.query.1",
             is_successful=True,
             inputs=[],
             outputs=[],
-            run_facets={"externalQuery": expected_ext_query},
+            run_facets={},
             job_facets={"jobType": _JOB_TYPE_FACET},
         )
         start, end = self.mock_event_pair.return_value
