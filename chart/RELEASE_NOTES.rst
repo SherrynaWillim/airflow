@@ -29,28 +29,22 @@ Airflow Helm Chart 1.21.0 (2026-04-20)
 Significant Changes
 ^^^^^^^^^^^^^^^^^^^
 
-- ``workers.safeToEvict`` field is now deprecated in favor of ``workers.celery.safeToEvict`` and ``workers.kubernetes.safeToEvict``. Please update your configuration accordingly. (#61915)
-- ``workers.extraPorts`` section is now deprecated in favor of ``workers.celery.extraPorts``. Please update your configuration accordingly. (#61919)
-- ``workers.hostAliases`` section is now deprecated in favor of ``workers.celery.hostAliases`` and ``workers.kubernetes.hostAliases``. Please update your configuration accordingly. (#61960)
-- ``workers.priorityClassName`` field is now deprecated in favor of ``workers.celery.priorityClassName`` and ``workers.kubernetes.priorityClassName``. Please update your configuration accordingly. (#61961)
-- ``workers.runtimeClassName`` field is now deprecated in favor of ``workers.celery.runtimeClassName`` and ``workers.kubernetes.runtimeClassName``. Please update your configuration accordingly. (#61962)
-- ``workers.schedulerName`` field is now deprecated in favor of ``workers.celery.schedulerName`` and ``workers.kubernetes.schedulerName``. Please update your configuration accordingly. (#62030)
-- ``workers.volumeClaimTemplates`` field is now deprecated in favor of ``workers.celery.volumeClaimTemplates``. Please update your configuration accordingly. (#62048)
-- ``workers.waitForMigrations`` section is now deprecated in favor of ``workers.celery.waitForMigrations``. Please update your configuration accordingly. (#62054)
-- ``workers.serviceAccount`` section is now deprecated in favor of ``workers.celery.serviceAccount`` and ``workers.kubernetes.serviceAccount``. Please update your configuration accordingly. (#64730)
-- ``workers.hpa`` section is now deprecated in favor of ``workers.celery.hpa``. Please update your configuration accordingly. (#64734)
-- ``workers.extraContainers`` field is now deprecated in favor of ``workers.celery.extraContainers`` and ``workers.kubernetes.extraContainers``. Please update your configuration accordingly. (#64739)
-- ``workers.extraInitContainers`` field is now deprecated in favor of ``workers.celery.extraInitContainers`` and ``workers.kubernetes.extraInitContainers``. Please update your configuration accordingly. (#64741)
-- ``workers.extraVolumes`` field is now deprecated in favor of ``workers.celery.extraVolumes`` and ``workers.kubernetes.extraVolumes``. Please update your configuration accordingly. (#64746)
-- ``workers.affinity`` field is now deprecated in favor of ``workers.celery.affinity`` and ``workers.kubernetes.affinity``. Please update your configuration accordingly. (#64860)
-- ``workers.tolerations`` field is now deprecated in favor of ``workers.celery.tolerations`` and ``workers.kubernetes.tolerations``. Please update your configuration accordingly. (#64976)
-- ``workers.topologySpreadConstraints`` field is now deprecated in favor of ``workers.celery.topologySpreadConstraints`` and ``workers.kubernetes.topologySpreadConstraints``. Please update your configuration accordingly. (#64980)
-- ``workers.annotations`` field is now deprecated in favor of ``workers.celery.annotations``. Please update your configuration accordingly. (#64982)
-- ``workers.podAnnotations`` field is now deprecated in favor of ``workers.celery.podAnnotations`` and ``workers.kubernetes.podAnnotations``. Please update your configuration accordingly. (#65027)
-- ``workers.labels`` field is now deprecated in favor of ``workers.celery.labels`` and ``workers.kubernetes.labels``. Please update your configuration accordingly. (#65030)
-- ``workers.logGroomerSidecar`` section is now deprecated in favor of ``workers.celery.logGroomerSidecar``. Please update your configuration accordingly. (#65033)
-- ``workers.env`` field is now deprecated in favor of ``workers.celery.env`` and ``workers.kubernetes.env``. Please update your configuration accordingly. (#65056)
-- ``workers.extraVolumeMounts`` field is now deprecated in favor of ``workers.celery.extraVolumeMounts`` and ``workers.kubernetes.extraVolumeMounts``. Please update your configuration accordingly. (#65059)
+More ``workers`` specific sections have been moved to ``workers.celery`` / ``workers.kubernetes`` sections
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+The following ``workers.*`` fields are deprecated and have been moved to both ``workers.celery.*`` and
+``workers.kubernetes.*``: ``safeToEvict`` (#61915), ``hostAliases`` (#61960), ``priorityClassName`` (#61961),
+``runtimeClassName`` (#61962), ``schedulerName`` (#62030), ``serviceAccount`` (#64730),
+``extraContainers`` (#64739), ``extraInitContainers`` (#64741), ``extraVolumes`` (#64746),
+``affinity`` (#64860), ``tolerations`` (#64976), ``topologySpreadConstraints`` (#64980),
+``podAnnotations`` (#65027), ``labels`` (#65030), ``env`` (#65056), ``extraVolumeMounts`` (#65059).
+
+The following ``workers.*`` fields are deprecated and have been moved to ``workers.celery.*`` only:
+``extraPorts`` (#61919), ``volumeClaimTemplates`` (#62048), ``waitForMigrations`` (#62054),
+``hpa`` (#64734), ``annotations`` (#64982), ``logGroomerSidecar`` (#65033).
+
+Please update your configuration accordingly. The previous configuration options are still working,
+but are deprecated and will be removed in a future version.
 - Default Airflow image is updated to ``3.2.0``
 
   The default Airflow image that is used with the Chart is now ``3.2.0``, previously it was ``3.1.8``. (#64841)
