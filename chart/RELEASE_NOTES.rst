@@ -29,23 +29,23 @@ Airflow Helm Chart 1.21.0 (2026-04-20)
 Significant Changes
 ^^^^^^^^^^^^^^^^^^^
 
-More ``workers`` specific sections have been moved to ``workers.celery`` / ``workers.kubernetes`` sections
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+The following ``workers.*`` fields are deprecated and have been moved to both ``workers.celery.*`` and ``workers.kubernetes.*``:
 
-The following ``workers.*`` fields are deprecated and have been moved to both ``workers.celery.*`` and
-``workers.kubernetes.*``: ``safeToEvict`` (#61915), ``hostAliases`` (#61960), ``priorityClassName`` (#61961),
-``runtimeClassName`` (#61962), ``schedulerName`` (#62030), ``serviceAccount`` (#64730),
-``extraContainers`` (#64739), ``extraInitContainers`` (#64741), ``extraVolumes`` (#64746),
-``affinity`` (#64860), ``tolerations`` (#64976), ``topologySpreadConstraints`` (#64980),
-``podAnnotations`` (#65027), ``labels`` (#65030), ``env`` (#65056), ``extraVolumeMounts`` (#65059).
+* ``safeToEvict`` (#61915), ``hostAliases`` (#61960), ``priorityClassName`` (#61961),
+* ``runtimeClassName`` (#61962), ``schedulerName`` (#62030), ``serviceAccount`` (#64730),
+* ``extraContainers`` (#64739), ``extraInitContainers`` (#64741), ``extraVolumes`` (#64746),
+* ``affinity`` (#64860), ``tolerations`` (#64976), ``topologySpreadConstraints`` (#64980),
+* ``podAnnotations`` (#65027), ``labels`` (#65030), ``env`` (#65056), ``extraVolumeMounts`` (#65059).
 
 The following ``workers.*`` fields are deprecated and have been moved to ``workers.celery.*`` only:
-``extraPorts`` (#61919), ``volumeClaimTemplates`` (#62048), ``waitForMigrations`` (#62054),
-``hpa`` (#64734), ``annotations`` (#64982), ``logGroomerSidecar`` (#65033).
+
+* ``extraPorts`` (#61919), ``volumeClaimTemplates`` (#62048), ``waitForMigrations`` (#62054),
+* ``hpa`` (#64734), ``annotations`` (#64982), ``logGroomerSidecar`` (#65033).
 
 Please update your configuration accordingly. The previous configuration options are still working,
 but are deprecated and will be removed in a future version.
-- Default Airflow image is updated to ``3.2.0``
+
+*  Default Airflow image is updated to ``3.2.0``
 
   The default Airflow image that is used with the Chart is now ``3.2.0``, previously it was ``3.1.8``. (#64841)
 
