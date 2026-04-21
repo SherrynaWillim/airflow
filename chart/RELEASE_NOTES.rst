@@ -30,10 +30,12 @@ Significant Changes
 ^^^^^^^^^^^^^^^^^^^
 
 
-Celery and Kubernetes config options have been moved to both ``workers.celery.*`` and ``workers.kubernetes.*``
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Workers config options have been moved under ``workers.celery.*`` and ``workers.kubernetes.*``
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-Please update your configuration accordingly:
+Please update your configuration accordingly.
+
+The following options have been moved to both ``workers.celery.*`` and ``workers.kubernetes.*``:
 
 * ``safeToEvict`` (#61915), ``hostAliases`` (#61960), ``priorityClassName`` (#61961),
 * ``runtimeClassName`` (#61962), ``schedulerName`` (#62030), ``serviceAccount`` (#64730),
@@ -41,13 +43,7 @@ Please update your configuration accordingly:
 * ``affinity`` (#64860), ``tolerations`` (#64976), ``topologySpreadConstraints`` (#64980),
 * ``podAnnotations`` (#65027), ``labels`` (#65030), ``env`` (#65056), ``extraVolumeMounts`` (#65059).
 
-The previous configuration options are still working but are deprecated and will be removed in a future version.
-
-
-Celery specific config options have been moved under the ``celery`` section in ``workers``
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-Please update your configuration accordingly:
+The following options are Celery-specific and have been moved under ``workers.celery.*``:
 
 * ``extraPorts`` (#61919), ``volumeClaimTemplates`` (#62048), ``waitForMigrations`` (#62054),
 * ``hpa`` (#64734), ``annotations`` (#64982), ``logGroomerSidecar`` (#65033).
@@ -58,10 +54,43 @@ Default Airflow image is updated to ``3.2.0`` (#64841)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 The default Airflow image that is used with the Chart is now ``3.2.0``, previously it was ``3.1.8``.
 
+New Features
+^^^^^^^^^^^^
+
+- Add ``ttlSecondsAfterFinished`` to database cleanup job (#64164)
+- Support ``tpl`` rendering in ServiceAccount annotations, ``metadataConnection``, and config ConfigMap names (#64763)
+
+Improvements
+^^^^^^^^^^^^
+
+- Generate JWT Secret of recommended length (#65082)
+
 Bug Fixes
 ^^^^^^^^^
 
 - Fixed broker URL secret name resolution to use ``airflow.fullname`` consistently. This fixes deployments where ``useStandardNaming=True`` and ``airflow.fullname != .Release.Name``, for example when using ``fullnameOverride``, ``nameOverride``, or the Airflow Helm chart as a dependency. (#65006)
+- Fix Helm chart image volume schema validation (#65409)
+- Remove duplicate fallback branch in ``airflowPodSecurityContextsIds`` helper (#65558)
+- Render cleanup RBAC only for ``KubernetesExecutor`` (#65539)
+- Fix default args/command for database cleanup (#63821)
+- Fix invalid deprecation warning in NOTES.txt (#64296)
+- Add missing fields in schema file (#64339)
+
+Doc only changes
+^^^^^^^^^^^^^^^^
+
+- Document secret key names for Helm chart ``secretName`` options (#64136)
+- Update customizing-labels documentation (#64170)
+- Fix documentation link (#64355)
+
+Misc
+^^^^
+
+- Simplify Helm Chart Logic & Misc (#63957)
+- Improve consistency of ``values.yaml`` & misc (#64559)
+- Align ``log_id_template`` with current default in Elasticsearch provider (#64332)
+- Update alpine version in pgbouncer and pgbouncer-exporter (#65413)
+- Add default ``GO_VERSION`` for pgbouncer-exporter Dockerfile (#65446)
 
 
 Airflow Helm Chart 1.20.0 (2026-03-16)

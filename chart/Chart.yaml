@@ -64,14 +64,18 @@ annotations:
       url: https://airflow.apache.org/docs/apache-airflow/3.2.0/_images/dag_overview_code.png
   artifacthub.io/changes: |
     - description: >
-        Deprecate workers.* fields in favor of workers.celery.* and workers.kubernetes.*:
+        Workers config options have been moved under workers.celery.* and workers.kubernetes.*:
         safeToEvict, hostAliases, priorityClassName, runtimeClassName, schedulerName,
         serviceAccount, extraContainers, extraInitContainers, extraVolumes, affinity,
         tolerations, topologySpreadConstraints, podAnnotations, labels, env, extraVolumeMounts
+        are moved to both; extraPorts, volumeClaimTemplates, waitForMigrations, hpa,
+        annotations, logGroomerSidecar are Celery-specific and moved under workers.celery.*
       kind: changed
       links:
       - name: '#61915'
         url: https://github.com/apache/airflow/pull/61915
+      - name: '#61919'
+        url: https://github.com/apache/airflow/pull/61919
       - name: '#61960'
         url: https://github.com/apache/airflow/pull/61960
       - name: '#61961'
@@ -80,8 +84,14 @@ annotations:
         url: https://github.com/apache/airflow/pull/61962
       - name: '#62030'
         url: https://github.com/apache/airflow/pull/62030
+      - name: '#62048'
+        url: https://github.com/apache/airflow/pull/62048
+      - name: '#62054'
+        url: https://github.com/apache/airflow/pull/62054
       - name: '#64730'
         url: https://github.com/apache/airflow/pull/64730
+      - name: '#64734'
+        url: https://github.com/apache/airflow/pull/64734
       - name: '#64739'
         url: https://github.com/apache/airflow/pull/64739
       - name: '#64741'
@@ -94,31 +104,18 @@ annotations:
         url: https://github.com/apache/airflow/pull/64976
       - name: '#64980'
         url: https://github.com/apache/airflow/pull/64980
+      - name: '#64982'
+        url: https://github.com/apache/airflow/pull/64982
       - name: '#65027'
         url: https://github.com/apache/airflow/pull/65027
       - name: '#65030'
         url: https://github.com/apache/airflow/pull/65030
+      - name: '#65033'
+        url: https://github.com/apache/airflow/pull/65033
       - name: '#65056'
         url: https://github.com/apache/airflow/pull/65056
       - name: '#65059'
         url: https://github.com/apache/airflow/pull/65059
-    - description: >
-        Deprecate workers.* fields in favor of workers.celery.* only:
-        extraPorts, volumeClaimTemplates, waitForMigrations, hpa, annotations, logGroomerSidecar
-      kind: changed
-      links:
-      - name: '#61919'
-        url: https://github.com/apache/airflow/pull/61919
-      - name: '#62048'
-        url: https://github.com/apache/airflow/pull/62048
-      - name: '#62054'
-        url: https://github.com/apache/airflow/pull/62054
-      - name: '#64734'
-        url: https://github.com/apache/airflow/pull/64734
-      - name: '#64982'
-        url: https://github.com/apache/airflow/pull/64982
-      - name: '#65033'
-        url: https://github.com/apache/airflow/pull/65033
     - description: Default Airflow image updated to 3.2.0
       kind: changed
       links:
@@ -129,8 +126,49 @@ annotations:
       links:
       - name: '#65006'
         url: https://github.com/apache/airflow/pull/65006
+    - description: Add ttlSecondsAfterFinished to database cleanup job
+      kind: added
+      links:
+      - name: '#64164'
+        url: https://github.com/apache/airflow/pull/64164
+    - description: >
+        Support tpl rendering in ServiceAccount annotations, metadataConnection, and config ConfigMap names
+      kind: added
+      links:
+      - name: '#64763'
+        url: https://github.com/apache/airflow/pull/64763
+    - description: Generate JWT Secret of recommended length
+      kind: changed
+      links:
+      - name: '#65082'
+        url: https://github.com/apache/airflow/pull/65082
     - description: Fix Helm chart image volume schema validation
       kind: fixed
       links:
       - name: '#65409'
         url: https://github.com/apache/airflow/pull/65409
+    - description: Remove duplicate fallback branch in airflowPodSecurityContextsIds helper
+      kind: fixed
+      links:
+      - name: '#65558'
+        url: https://github.com/apache/airflow/pull/65558
+    - description: Render cleanup RBAC only for KubernetesExecutor
+      kind: fixed
+      links:
+      - name: '#65539'
+        url: https://github.com/apache/airflow/pull/65539
+    - description: Fix default args/command for database cleanup
+      kind: fixed
+      links:
+      - name: '#63821'
+        url: https://github.com/apache/airflow/pull/63821
+    - description: Fix invalid deprecation warning in NOTES.txt
+      kind: fixed
+      links:
+      - name: '#64296'
+        url: https://github.com/apache/airflow/pull/64296
+    - description: Add missing fields in schema file
+      kind: fixed
+      links:
+      - name: '#64339'
+        url: https://github.com/apache/airflow/pull/64339
